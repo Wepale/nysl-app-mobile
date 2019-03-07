@@ -6,6 +6,21 @@
   color:black;
 }
 
-.myContainer {
+.info_section {
+  margin: 2rem;
+}
+
+
+/* Landscape properties */
+@media (orientation: landscape) {
+
+  .landscape {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 
 }
+
+/* @include media-breakpoint-up(sm) {
+
+} */

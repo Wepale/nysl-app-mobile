@@ -14,106 +14,221 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link href="css/normalize.css" rel="stylesheet">
+  <!-- <link href="css/reset.css" rel="stylesheet"> -->
   <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
-  <div class="container myContainer">
-    <div class="container_title row justify-content-center">
-      <h1>Games</h1>
-    </div>
-    <div class="container_date row justify-content-between m-1">
-      <a href="octoberSchedule.html"><i class="material-icons">arrow_back_ios</i></a>
-      <div class="">
-        <i class="far fa-calendar-alt"></i>
-        <h4>September</h4>
-      </div>
-      <a href="octoberSchedule.html"><i class="material-icons">arrow_forward_ios</i></a>
-    </div>
-    <div class="container_gameInfo row justify-content-between">
-      <a href="#" class="container">
-        <div class="row justify-content-between">
-          <p>U1</p>
-          <p>01/09, 9:30 a.m.</p>
-          <p>U4</p>
-        </div>
-      </a>
-    </div>
-    <div class="container_gameInfo row justify-content-between">
-      <a href="#" class="container">
-        <div class="row justify-content-between">
-          <p>U3</p>
-          <p>01/09, 1:00 p.m.</p>
-          <p>U2</p>
-        </div>
-      </a>
-    </div>
-    <div class="container_gameInfo row justify-content-between">
-      <a href="#" class="container">
-        <div class="row justify-content-between">
-          <p>U5</p>
-          <p>08/09, 9:30 a.m.</p>
-          <p>U6</p>
-        </div>
-      </a>
-    </div>
-    <div class="container_gameInfo row justify-content-between">
-      <a href="#" class="container">
-        <div class="row justify-content-between">
-          <p>U6</p>
-          <p>08/09, 1:00 p.m.</p>
-          <p>U1</p>
-        </div>
-      </a>
-    </div>
-    <div class="container_gameInfo row justify-content-between">
-      <a href="#" class="container">
-        <div class="row justify-content-between">
-          <p>U2</p>
-          <p>15/09, 9:30 a.m.</p>
-          <p>U4</p>
-        </div>
-      </a>
-    </div>
-    <div class="container_gameInfo row justify-content-between">
-      <a href="#" class="container">
-        <div class="row justify-content-between">
-          <p>U3</p>
-          <p>15/09, 1:00 p.m.</p>
-          <p>U5</p>
-        </div>
-      </a>
-    </div>
-    <div class="container_gameInfo row justify-content-between">
-      <a href="#" class="container">
-        <div class="row justify-content-between">
-          <p>U1</p>
-          <p>22/09, 9:30 a.m.</p>
-          <p>U3</p>
-        </div>
-      </a>
-    </div>
-    <div class="container_gameInfo row justify-content-between">
-      <a href="#" class="container">
-        <div class="row justify-content-between">
-          <p>U2</p>
-          <p>22/09, 1:00 p.m.</p>
-          <p>U6</p>
-        </div>
-      </a>
-    </div>
-    <div class="container_gameInfo row justify-content-between">
-      <a href="#" class="container">
-        <div class="row justify-content-between">
-          <p>U4</p>
-          <p>29/09, 9:30 a.m.</p>
-          <p>U5</p>
-        </div>
-      </a>
-    </div>
-  </div>
 
+  <div id="app" class="landscape">
+    <div class="schedule">
+
+      <div id="septemberSchedule" v-show="show.septemberSchedule" class="septemberSchedule">
+        <div class="container myContainer">
+          <div class="container_title row justify-content-center">
+            <h1>Game</h1>
+          </div>
+          <div class="container_date row justify-content-between m-1">
+            <a href="#" @click.prevent="showOnlyThis('septemberSchedule','octoberSchedule')"><i class="material-icons">arrow_back_ios</i></a>
+            <div class="">
+              <h4>September</h4>
+            </div>
+            <a href="#" @click.prevent="showOnlyThis('septemberSchedule','octoberSchedule')"><i class="material-icons">arrow_forward_ios</i></a>
+          </div>
+          <div class="container_gameInfo row justify-content-between">
+            <a href="#" @click.prevent="showOnlyThis('septemberSchedule','game1')" class="container">
+              <div class="row justify-content-between">
+                <p>U1</p>
+                <p>01/09, 9:30 a.m.</p>
+                <p>U4</p>
+              </div>
+            </a>
+          </div>
+          <div class="container_gameInfo row justify-content-between">
+            <a href="#" @click.prevent="showOnlyThis('septemberSchedule','game2')"  class="container">
+              <div class="row justify-content-between">
+                <p>U3</p>
+                <p>01/09, 1:00 p.m.</p>
+                <p>U2</p>
+              </div>
+            </a>
+          </div>
+          <div class="container_gameInfo row justify-content-between">
+            <a href="#" class="container">
+              <div class="row justify-content-between">
+                <p>U5</p>
+                <p>08/09, 9:30 a.m.</p>
+                <p>U6</p>
+              </div>
+            </a>
+          </div>
+          <div class="container_gameInfo row justify-content-between">
+            <a href="#" class="container">
+              <div class="row justify-content-between">
+                <p>U6</p>
+                <p>08/09, 1:00 p.m.</p>
+                <p>U1</p>
+              </div>
+            </a>
+          </div>
+          <div class="container_gameInfo row justify-content-between">
+            <a href="#" class="container">
+              <div class="row justify-content-between">
+                <p>U2</p>
+                <p>15/09, 9:30 a.m.</p>
+                <p>U4</p>
+              </div>
+            </a>
+          </div>
+          <div class="container_gameInfo row justify-content-between">
+            <a href="#" class="container">
+              <div class="row justify-content-between">
+                <p>U3</p>
+                <p>15/09, 1:00 p.m.</p>
+                <p>U5</p>
+              </div>
+            </a>
+          </div>
+          <div class="container_gameInfo row justify-content-between">
+            <a href="#" class="container">
+              <div class="row justify-content-between">
+                <p>U1</p>
+                <p>22/09, 9:30 a.m.</p>
+                <p>U3</p>
+              </div>
+            </a>
+          </div>
+          <div class="container_gameInfo row justify-content-between">
+            <a href="#" class="container">
+              <div class="row justify-content-between">
+                <p>U2</p>
+                <p>22/09, 1:00 p.m.</p>
+                <p>U6</p>
+              </div>
+            </a>
+          </div>
+          <div class="container_gameInfo row justify-content-between">
+            <a href="game1.html" class="container">
+              <div class="row justify-content-between">
+                <p>U4</p>
+                <p>29/09, 9:30 a.m.</p>
+                <p>U5</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div v-show="show.octoberSchedule" class="octoberSchedule">
+        <div class="container">
+          <div class="container_title row justify-content-center">
+            <h1>Games</h1>
+          </div>
+          <div class="container_date row justify-content-between m-1">
+            <a href="#" @click.prevent="showOnlyThis('octoberSchedule','septemberSchedule')"><i class="material-icons">arrow_back_ios</i></a>
+            <div class="">
+              <h4>October</h4>
+            </div>
+            <a href="#" @click.prevent="showOnlyThis('octoberSchedule','septemberSchedule')"><i class="material-icons">arrow_forward_ios</i></a>
+          </div>
+          <div class="container_gameInfo row justify-content-between">
+            <p>U2</p>
+            <p>06/10, 9:30 a.m.</p>
+            <p>U5</p>
+          </div>
+          <div class="container_gameInfo row justify-content-between">
+            <p>U1</p>
+            <p>06/10, 1:00 p.m.</p>
+            <p>U6</p>
+          </div>
+          <div class="container_gameInfo row justify-content-between">
+            <p>U3</p>
+            <p>13/10, 9:30 a.m.</p>
+            <p>U4</p>
+          </div>
+          <div class="container_gameInfo row justify-content-between">
+            <p>U5</p>
+            <p>13/10, 1:00 p.m.</p>
+            <p>U1</p>
+          </div>
+          <div class="container_gameInfo row justify-content-between">
+            <p>U6</p>
+            <p>20/10, 9:30 a.m.</p>
+            <p>U3</p>
+          </div>
+          <div class="container_gameInfo row justify-content-between">
+            <p>U2</p>
+            <p>20/10, 1:00 p.m.</p>
+            <p>U4</p>
+          </div>
+          <div class="container_gameInfo row justify-content-between">
+            <p>U3</p>
+            <p>27/10, 9:30 a.m.</p>
+            <p>U1</p>
+          </div>
+          <div class="container_gameInfo row justify-content-between">
+            <p>U5</p>
+            <p>27/10, 1:00 p.m.</p>
+            <p>U6</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="games">
+
+      <div v-show="show.game1" class="game1">
+        <div class="container info">
+          <div class="row m-5 justify-content-start info_back">
+            <a v-if="!landscape" href="#" @click.prevent="showOnlyThis('game1','septemberSchedule')"><i class="material-icons">arrow_back_ios</i></a>
+          </div>
+          <div class="row justify-content-center info_section">
+            <h2>U1 vs U4</h2>
+          </div>
+          <div class="row align-items-center flex-column info_section">
+            <h4>9:30 a.m.</h4>
+            <h2>01/09/2019</h2>
+          </div>
+          <div class="row justify-content-center info_section">
+            <h2>AJ Katzenmaier</h2>
+          </div>
+          <div class="row justify-content-center info_section">
+            <iframe width="300" height="300" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDQkW0dhr_SQrpK8KKkU_MnFDC_MpffRqI&q=AJ+Katzenmaier
+              &center=42.325913,-87.862714&zoom=13" allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      </div>
+
+      <div v-show="show.game2" class="game2">
+        <div class="container info">
+          <div class="row m-5 justify-content-start info_back">
+            <a v-if="!landscape" href="#" @click.prevent="showOnlyThis('game2','septemberSchedule')"><i class="material-icons">arrow_back_ios</i></a>
+          </div>
+          <div class="row justify-content-center info_section">
+            <h2>U3 vs U2</h2>
+          </div>
+          <div class="row align-items-center flex-column info_section">
+            <h4>1:00 a.m.</h4>
+            <h2>01/09/2019</h2>
+          </div>
+          <div class="row justify-content-center info_section">
+            <h2>Greenbay</h2>
+          </div>
+          <div class="row justify-content-center info_section">
+            <iframe width="200" height="200" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDQkW0dhr_SQrpK8KKkU_MnFDC_MpffRqI&q
+              &center=42.320994,-87.868868&zoom=13" allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="scripts/main.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

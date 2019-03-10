@@ -1,0 +1,195 @@
+{
+  "games": [
+    {
+      "previus": "sepSchedule",
+      "id": "sepGame1",
+      "month": "september",
+      "date": "01/09",
+      "hTeam": "U1",
+      "vTeam": "U4",
+      "time": "9:30 a.m",
+      "location": "AJ Katzenmaier",
+      "map": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.654246110983!2d-87.63123908399346!3d41.90029237922049!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd34e07f6bac3%3A0x68a82e5d59952c86!2s24+W+Walton+St%2C+Chicago%2C+IL+60610%2C+EE.+UU.!5e0!3m2!1ses!2ses!4v1552142551561"
+
+    },
+    {
+      "previus": "sepSchedule",
+      "id": "sepGame2",
+      "month": "september",
+      "date": "01/09",
+      "hTeam": "U3",
+      "vTeam": "U2",
+      "time": "1:00 p.m",
+      "location": "Greenbay",
+      "map": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.025884368853!2d-87.64002798416804!3d41.91380227921946!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd34073f306a3%3A0x9e1726bbf8f23f0e!2s1734+N+Orleans+St%2C+Chicago%2C+IL+60614%2C+EE.+UU.!5e0!3m2!1ses!2ses!4v1552145173662"
+    },
+    {
+      "previus": "sepSchedule",
+      "id": "sepGame3",
+      "month": "september",
+      "date": "08/09",
+      "hTeam": "U5",
+      "vTeam": "U6",
+      "time": "9:30 a.m",
+      "location": "Howard A Yeager",
+      "map": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2968.5856830856223!2d-87.66511458416777!3d41.92326457921857!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd2e37f9b8d2d%3A0x62ad8b907dd755d6!2s2245+N+Southport+Ave%2C+Chicago%2C+IL+60614%2C+EE.+UU.!5e0!3m2!1ses!2ses!4v1552145284839"
+    },
+    {
+      "previus": "sepSchedule",
+      "id": "sepGame4",
+      "month": "september",
+      "date": "08/09",
+      "hTeam": "U6",
+      "vTeam": "U1",
+      "time": "1:00 p.m",
+      "location": "Marjorie P Hart",
+      "map": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2968.291914658428!2d-87.64808628416765!3d41.92957827921823!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd30f2630e551%3A0x3e719e44a5cef714!2s2625+N+Orchard+St%2C+Chicago%2C+IL+60614%2C+EE.+UU.!5e0!3m2!1ses!2ses!4v1552145329612"
+    },
+    {
+      "previus": "sepSchedule",
+      "id": "sepGame5",
+      "month": "september",
+      "date": "15/09",
+      "hTeam": "U2",
+      "vTeam": "U4",
+      "time": "9:30 a.m",
+      "location": "North",
+      "map": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.3364882315896!2d-87.64835588416823!3d41.907124679219805!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd33af13a8945%3A0xb6ad1ec2b6f379ba!2s1409+N+Ogden+Ave%2C+Chicago%2C+IL+60610%2C+EE.+UU.!5e0!3m2!1ses!2ses!4v1552145390332"
+    },
+    {
+      "previus": "sepSchedule",
+      "id": "sepGame6",
+      "month": "september",
+      "date": "15/09",
+      "hTeam": "U3",
+      "vTeam": "U5",
+      "time": "1:00 p.m",
+      "location": "AJ Katzenmaier",
+      "map": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.654246110983!2d-87.63123908399346!3d41.90029237922049!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd34e07f6bac3%3A0x68a82e5d59952c86!2s24+W+Walton+St%2C+Chicago%2C+IL+60610%2C+EE.+UU.!5e0!3m2!1ses!2ses!4v1552142551561"
+    },
+    {
+      "previus": "sepSchedule",
+      "id": "sepGame7",
+      "month": "september",
+      "date": "22/09",
+      "hTeam": "U1",
+      "vTeam": "U3",
+      "time": "9:30 a.m",
+      "location": "South",
+      "map": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2968.7479505250667!2d-87.65355538416786!3d41.91977677921892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd3196fb41dc7%3A0x970be7f7d6336df5!2s2101+N+Fremont+St%2C+Chicago%2C+IL+60614%2C+EE.+UU.!5e0!3m2!1ses!2ses!4v1552145474551"
+    },
+    {
+      "previus": "sepSchedule",
+      "id": "sepGame8",
+      "month": "september",
+      "date": "22/09",
+      "hTeam": "U2",
+      "vTeam": "U6",
+      "time": "1:00 p.m",
+      "location": "Howard A Yeager",
+      "map": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2968.5856830856223!2d-87.66511458416777!3d41.92326457921857!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd2e37f9b8d2d%3A0x62ad8b907dd755d6!2s2245+N+Southport+Ave%2C+Chicago%2C+IL+60614%2C+EE.+UU.!5e0!3m2!1ses!2ses!4v1552145284839"
+    },
+    {
+      "previus": "sepSchedule",
+      "id": "sepGame9",
+      "month": "september",
+      "date": "29/09",
+      "hTeam": "U4",
+      "vTeam": "U5",
+      "time": "9:30 a.m",
+      "location": "Greenbay",
+      "map": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.025884368853!2d-87.64002798416804!3d41.91380227921946!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd34073f306a3%3A0x9e1726bbf8f23f0e!2s1734+N+Orleans+St%2C+Chicago%2C+IL+60614%2C+EE.+UU.!5e0!3m2!1ses!2ses!4v1552145173662"
+    },
+    {
+      "previus": "octSchedule",
+      "id": "octGame10",
+      "month": "october",
+      "date": "06/10",
+      "hTeam": "U2",
+      "vTeam": "U5",
+      "time": "9:30 a.m",
+      "location": "Marjorie P Hart",
+      "map": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2968.291914658428!2d-87.64808628416765!3d41.92957827921823!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd30f2630e551%3A0x3e719e44a5cef714!2s2625+N+Orchard+St%2C+Chicago%2C+IL+60614%2C+EE.+UU.!5e0!3m2!1ses!2ses!4v1552145329612"
+    },
+    {
+      "previus": "octSchedule",
+      "id": "octGame11",
+      "month": "october",
+      "date": "06/10",
+      "hTeam": "U1",
+      "vTeam": "U6",
+      "time": "1:00 p.m",
+      "location": "South",
+      "map": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2968.7479505250667!2d-87.65355538416786!3d41.91977677921892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd3196fb41dc7%3A0x970be7f7d6336df5!2s2101+N+Fremont+St%2C+Chicago%2C+IL+60614%2C+EE.+UU.!5e0!3m2!1ses!2ses!4v1552145474551"
+    },
+    {
+      "previus": "octSchedule",
+      "id": "octGame12",
+      "month": "october",
+      "date": "13/10",
+      "hTeam": "U3",
+      "vTeam": "U4",
+      "time": "9:30 a.m",
+      "location": "Howard A Yeager",
+      "map": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2968.5856830856223!2d-87.66511458416777!3d41.92326457921857!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd2e37f9b8d2d%3A0x62ad8b907dd755d6!2s2245+N+Southport+Ave%2C+Chicago%2C+IL+60614%2C+EE.+UU.!5e0!3m2!1ses!2ses!4v1552145284839"
+    },
+    {
+      "previus": "octSchedule",
+      "id": "octGame13",
+      "month": "october",
+      "date": "13/10",
+      "hTeam": "U5",
+      "vTeam": "U1",
+      "time": "1:00 p.m",
+      "location": "Greenbay ",
+      "map": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.025884368853!2d-87.64002798416804!3d41.91380227921946!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd34073f306a3%3A0x9e1726bbf8f23f0e!2s1734+N+Orleans+St%2C+Chicago%2C+IL+60614%2C+EE.+UU.!5e0!3m2!1ses!2ses!4v1552145173662"
+    },
+    {
+      "previus": "octSchedule",
+      "id": "octGame14",
+      "month": "october",
+      "date": "20/10",
+      "hTeam": "U6",
+      "vTeam": "U3",
+      "time": "9:30 a.m",
+      "location": "North",
+      "map": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.3364882315896!2d-87.64835588416823!3d41.907124679219805!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd33af13a8945%3A0xb6ad1ec2b6f379ba!2s1409+N+Ogden+Ave%2C+Chicago%2C+IL+60610%2C+EE.+UU.!5e0!3m2!1ses!2ses!4v1552145390332"
+
+    },
+    {
+      "previus": "octSchedule",
+      "id": "octGame15",
+      "month": "october",
+      "date": "20/10",
+      "hTeam": "U2",
+      "vTeam": "U4",
+      "time": "1:00 p.m",
+      "location": "Marjorie P Hart",
+      "map": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2968.291914658428!2d-87.64808628416765!3d41.92957827921823!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd30f2630e551%3A0x3e719e44a5cef714!2s2625+N+Orchard+St%2C+Chicago%2C+IL+60614%2C+EE.+UU.!5e0!3m2!1ses!2ses!4v1552145329612"
+
+    },
+    {
+      "previus": "octSchedule",
+      "id": "octGame16",
+      "month": "october",
+      "date": "27/10",
+      "hTeam": "U3",
+      "vTeam": "U1",
+      "time": "9:30 a.m",
+      "location": "AJ Katzenmaier",
+      "map": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.654246110983!2d-87.63123908399346!3d41.90029237922049!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd34e07f6bac3%3A0x68a82e5d59952c86!2s24+W+Walton+St%2C+Chicago%2C+IL+60610%2C+EE.+UU.!5e0!3m2!1ses!2ses!4v1552142551561"
+
+    },
+    {
+      "previus": "octSchedule",
+      "id": "octGame17",
+      "month": "october",
+      "date": "27/10",
+      "hTeam": "U5",
+      "vTeam": "U6",
+      "time": "1:00 p.m",
+      "location": "Howard A Yeager",
+      "map": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2968.5856830856223!2d-87.66511458416777!3d41.92326457921857!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd2e37f9b8d2d%3A0x62ad8b907dd755d6!2s2245+N+Southport+Ave%2C+Chicago%2C+IL+60614%2C+EE.+UU.!5e0!3m2!1ses!2ses!4v1552145284839"
+    }
+]
+}

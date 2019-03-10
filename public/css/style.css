@@ -6,8 +6,9 @@
   color:black;
 }
 
-.info_section {
-  margin: 2rem;
+.schedule{
+  max-height: 100vh;
+  overflow: auto;
 }
 
 

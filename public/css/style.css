@@ -1,3 +1,6 @@
+[v-cloak] > * { display:none; }
+[v-cloak]::before { content: "loading..."; }
+
 .container_gameInfo {
   margin: 1rem;
 }
@@ -11,6 +14,10 @@
   overflow: auto;
 }
 
+.hr {
+  width: 100%;
+  margin: 0;
+}
 
 /* Landscape properties */
 @media (orientation: landscape) {
@@ -18,6 +25,10 @@
   .landscape {
     display: grid;
     grid-template-columns: 1fr 1fr;
+  }
+
+  p {
+    margin-bottom: 0;
   }
 
 }

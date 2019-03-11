@@ -4,7 +4,7 @@
 <head>
   <title>NYSL</title>
   <link rel="shortcut icon" sizes="196x196" href="assets/nysl_logo.png">
-  <link rel="apple-touch-icon" href="assets/icon.png">
+  <link rel="apple-touch-icon" href="assets/nysl_logo.png">
 
   <meta charset="utf-8">
   <meta name="mobile-web-app-capable" content="yes">
@@ -21,40 +21,52 @@
   <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.blue_grey-orange.min.css"> -->
   <script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 </head>
 
 <body>
 
-  <div id="app" class="landscape">
+  <div id="app" class="landscape" v-cloak>
+
     <div v-if="isLoaded" class="schedule">
-
-      <div id="sepSchedule" v-show="show.sepSchedule" class="sepSchedule">
-        <div class="container myContainer">
-          <div class="container_title row justify-content-center">
-            <h1>Games</h1>
-          </div>
-          <div class="container_date row justify-content-between m-1">
-            <a href="#" @click.prevent="showThis('sepSchedule','octSchedule')"><i class="material-icons">arrow_back_ios</i></a>
-            <div class="">
-              <h4>September</h4>
+      <transition
+   name="custom-classes-transition"
+   enter-to-class="animated bounceInRight"
+   leave-to-class="animated bounceOutRight"
+ >
+        <div id="sepSchedule" v-show="show.sepSchedule" class="sepSchedule">
+          <div class="container myContainer">
+            <div class="container_title row justify-content-center">
+              <h1>Games</h1>
             </div>
-            <a href="#" @click.prevent="showThis('sepSchedule','octSchedule')"><i class="material-icons">arrow_forward_ios</i></a>
-          </div>
-
-          <div v-for="game in sepGames" class="container_gameInfo row justify-content-between">
-            <a href="#" @click.prevent="showThis(game.previus, game.id)" class="container">
-              <div class="row justify-content-between">
-                <p>{{ game.hTeam }}</p>
-                <p>{{ game.date }} {{ game.time }}</p>
-                <p>{{ game.vTeam }}</p>
+            <div class="container_date row justify-content-between m-1">
+              <a href="#" @click.prevent="showThis('sepSchedule','octSchedule')"><i class="material-icons">arrow_back_ios</i></a>
+              <div class="">
+                <h4>September</h4>
               </div>
-            </a>
+              <a href="#" @click.prevent="showThis('sepSchedule','octSchedule')"><i class="material-icons">arrow_forward_ios</i></a>
+            </div>
+
+            <div v-for="game in sepGames" class="container_gameInfo row justify-content-between">
+              <a href="#" @click.prevent="showThis(game.previus, game.id)" class="container">
+                <div class="row justify-content-between">
+                  <p>{{ game.hTeam }}</p>
+                  <p>{{ game.date }} {{ game.time }}</p>
+                  <p>{{ game.vTeam }}</p>
+                </div>
+              </a>
+              <hr class="hr">
+            </div>
+
           </div>
-
         </div>
-      </div>
-
+      </transition>
+      <transition
+      name="custom-classes-transition"
+      enter-to-class="animated bounceInRight"
+      leave-to-class="animated bounceOutRight"
+      >
       <div v-show="show.octSchedule" class="octSchedule">
         <div class="container">
           <div class="container_title row justify-content-center">
@@ -81,6 +93,7 @@
 
         </div>
       </div>
+      </transition>
 
     </div>
 
@@ -92,18 +105,16 @@
             <a v-if="!landscape" href="#" @click.prevent="showThis(game.id, game.previus)"><i class="material-icons">arrow_back_ios</i></a>
           </div>
           <div class="row justify-content-center info_section">
-            <h2>{{ game.hTeam }} vs {{ game.vTeam }}</h2>
-          </div>
-          <div class="row align-items-center flex-column info_section">
-            <h4>{{ game.time }}</h4>
-            <h2>{{ game.date }}/2019</h2>
+            <p>{{ game.hTeam }} vs {{ game.vTeam }}</p>
           </div>
           <div class="row justify-content-center info_section">
-            <h2>{{ game.location }}</h2>
+            <p>{{ game.time }} {{ game.date }}/2019</p>
           </div>
           <div class="row justify-content-center info_section">
-            <iframe :src="game.map"
-              width="300" height="300" frameborder="0" style="border:0" allowfullscreen>
+            <p>{{ game.location }}</p>
+          </div>
+          <div class="row justify-content-center info_section">
+            <iframe :src="game.map" width="95%" height="300vh" frameborder="0" style="border:0" allowfullscreen>
             </iframe>
 
           </div>
@@ -111,6 +122,18 @@
       </div>
 
     </div>
+
+    <button @click="signOut">
+      Sign-out
+    </button>
+    <button @click="signIn" class="">
+      <i class="material-icons">account_circle</i>Sign-in with Google
+    </button>
+
+    <div id="chat" class="chat container"></div>
+    <input type="text" id="message">
+    <button id="send" @click="sendMessage">Enviar</button>
+
 
   </div>
 
@@ -120,10 +143,12 @@
   <!-- Add additional services that you want to use -->
   <script src="/__/firebase/5.8.5/firebase-auth.js"></script>
   <script src="/__/firebase/5.8.5/firebase-database.js"></script>
+  <script src="/__/firebase/5.8.5/firebase-firestore.js"></script>
+  <script src="/__/firebase/5.8.5/firebase-messaging.js"></script>
+  <script src="/__/firebase/5.8.5/firebase-functions.js"></script>
   <script src="/__/firebase/init.js"></script>
 
   <script src="scripts/vue.js"></script>
-  <script src="scripts/login.js"></script>
   <script src="scripts/main.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

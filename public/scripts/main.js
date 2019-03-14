@@ -13,7 +13,6 @@ const myVue = new Vue({
     db: firebase.database(),
     show: {
       sepSchedule: true,
-      octSchedule: false,
     }
   },
 
@@ -23,17 +22,24 @@ const myVue = new Vue({
       window.addEventListener("orientationchange", () => this.landscape = !this.landscape);
     },
 
+
     doOnLandscape() {
-      switch (true) {
-        case this.actualShow.includes("Game"):
-          this.show[this.gameData.find(game => game.id === this.actualShow).previus] = true;
-          break;
-        case this.actualShow.includes("Schedule"):
-          this.show[this.gameData.find(game => game.previus === this.actualShow).id] = true;
-          break;
-        default:
-          //Put something here
+
+      if (this.actualShow.includes("Game")) {
+        this.show[this.gameData.find(game => game.id === this.actualShow).previus] = true;
+      } else if (this.actualShow.includes("Schedule")) {
+        this.show[this.gameData.find(game => game.previus === this.actualShow).id] = true;
       }
+      // switch (true) {
+      //   case this.actualShow.includes("Game"):
+      //     this.show[this.gameData.find(game => game.id === this.actualShow).previus] = true;
+      //     break;
+      //   case this.actualShow.includes("Schedule"):
+      //     this.show[this.gameData.find(game => game.previus === this.actualShow).id] = true;
+      //     break;
+      //   default:
+      //     //Includes "chat"
+      // }
     },
 
     showOnlyThis(keyName) {
@@ -44,7 +50,8 @@ const myVue = new Vue({
     showThis(before, actual) {
       this.previusShow = before;
       this.actualShow = actual;
-      this.showOnlyThis(actual)
+      this.showOnlyThis(actual);
+      this.$forceUpdate();
       if (this.landscape) {
         this.doOnLandscape();
       }
@@ -62,6 +69,7 @@ const myVue = new Vue({
       this.gameData = data;
       this.sepGames = data.filter(game => game.month === "september");
       this.octGames = data.filter(game => game.month === "october");
+      this.gameData.map(game => this.getMessage(game.msgChat, game.chat));
       this.isLoaded = true;
     },
 
@@ -86,7 +94,7 @@ const myVue = new Vue({
       });
     },
 
-    getUserID(){
+    getUserID() {
       return firebase.auth().currentUser.uid;
     },
 
@@ -109,14 +117,17 @@ const myVue = new Vue({
     },
 
     //Firebase Database
-    sendMessage() {
-      let msg = document.getElementById('message').value;
-      document.getElementById('message').value = "";
-      this.db.ref('message').push({
+
+    sendMessage(msgID) {
+      console.log(msgID);
+      console.log(document.getElementById(msgID));
+      let msg = document.getElementById(msgID).value;
+      this.db.ref(msgID).push({
         message: msg,
         user: this.getUserName(),
         userID: this.currentUID
       });
+      document.getElementById(msgID).value = "";
     },
 
     writeUserData(userId, name, imageUrl) {
@@ -126,30 +137,49 @@ const myVue = new Vue({
       });
     },
 
-    getMessage() {
-      this.db.ref('message').on('child_added', data => {
-        document.getElementById('chat').innerHTML += `<p> ${data.val().user}: ${data.val().message}</p>`;
-        this.user
+    getMessage(msgID, chatID) {
+      this.db.ref(msgID).on('child_added', data => {
+        if (data.val().userID == this.currentUID) {
+          document.getElementById(chatID).innerHTML +=
+            `<div class="d-flex justify-content-end">
+            <div class="talk-bubble tri-right round right-top">
+              <div class="talktextRight">
+                <p class="pChat name">${data.val().user}</p>
+                <p class="pChat">${data.val().message}</p>
+              </div>
+            </div>
+            </div>`;
+          this.scrollBottom(chatID)
+        } else {
+          document.getElementById(chatID).innerHTML +=
+            `<div class="d-flex justify-content-start">
+        <div class="talk-bubble tri-right left-top round">
+          <div class="talktextLeft">
+            <p class="pChat name">${data.val().user}</p>
+            <p class="pChat">${data.val().message}</p>
+          </div>
+        </div>
+        </div>`;
+          this.scrollBottom(chatID)
+        }
       });
-    }
+    },
+
+    scrollBottom(chatID) {
+      const chat = document.getElementById(chatID);
+      chat.scrollTop = chat.scrollHeight - chat.clientHeight;
+    },
   },
 
   watch: {
     landscape() {
-      //User was on portrait
-      if (this.landscape) {
-        this.doOnLandscape()
-        //User was on landscape
-      } else {
-        this.showOnlyThis(this.actualShow);
-      }
+      this.landscape ? this.doOnLandscape() : this.showOnlyThis(this.actualShow);
     }
   },
 
   created() {
     this.getData();
     this.initFirebaseAuth();
-    this.getMessage();
   },
   beforeUpdate() {
     console.log("Before: " + this.previusShow);

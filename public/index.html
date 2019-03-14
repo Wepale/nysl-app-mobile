@@ -11,132 +11,167 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- Icons -->
   <link href="https://fonts.googleapis.com/css?family=Martel:200" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Material Design Lite -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.orange-indigo.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+  <script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+  <!-- Animated Css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
   <!-- CSS -->
   <link href="css/reset.css" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link href="css/style.css" rel="stylesheet">
-
-  <!-- Material Design Lite -->
-  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.blue_grey-orange.min.css"> -->
-  <script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
 </head>
 
 <body>
-
+  <!-- leave-active-class="animated fadeOut" -->
+  <!-- mode="out-in"  -->
+  <!-- :duration="800" -->
   <div id="app" class="landscape" v-cloak>
 
+    <div class="header">
+      <div class="myContainer">
+        <div class="container d-flex justify-content-between align-items-center">
+          <!-- <div class=""> -->
+            <img class="logo" src="http://assets.stickpng.com/thumbs/58428defa6515b1e0ad75ab4.png" alt="Logo">
+          <!-- </div> -->
+          <div class="d-flex justify-content-end align-items-center">
+            <!-- <a href="#" class="" @click.prevent="signOut">Sign-out</a> -->
+            <a href="#" @click.prevent="signIn" class=""><i class="material-icons">account_circle</i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div v-if="isLoaded" class="schedule">
-      <transition
-   name="custom-classes-transition"
-   enter-to-class="animated bounceInRight"
-   leave-to-class="animated bounceOutRight"
- >
-        <div id="sepSchedule" v-show="show.sepSchedule" class="sepSchedule">
-          <div class="container myContainer">
+
+
+      <transition name="custom-classes-transition" enter-active-class="animated fadeIn">
+        <div id="sepSchedule" v-if="show.sepSchedule" class="sepSchedule" key="september">
+          <div class="container">
             <div class="container_title row justify-content-center">
               <h1>Games</h1>
             </div>
             <div class="container_date row justify-content-between m-1">
               <a href="#" @click.prevent="showThis('sepSchedule','octSchedule')"><i class="material-icons">arrow_back_ios</i></a>
-              <div class="">
+              <div>
                 <h4>September</h4>
               </div>
               <a href="#" @click.prevent="showThis('sepSchedule','octSchedule')"><i class="material-icons">arrow_forward_ios</i></a>
             </div>
+            <div v-for="game in sepGames" class="container_gameInfo row justify-content-center shadow p-3 mb-5 bg-white rounded">
+              <a href="#" @click.prevent="showThis(game.previus, game.id)">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="d-flex flex-column align-items-center">
+                    <img :src="game.hTeamImg" alt="TeamLogo" class="scheduleImg">
+                    <p class="teamLeft">{{ game.hTeam }}</p>
+                  </div>
+                  <p class="timeInfo  d-flex justify-content-center">{{ game.date }} {{ game.time }}</p>
+                  <div class="d-flex flex-column align-items-center">
+                    <img :src="game.vTeamImg" alt="TeamLogo" class="scheduleImg">
+                    <p class="teamRight">{{ game.vTeam }}</p>
+                  </div>
+                </div>
+              </a>
+              <!-- <hr class="hr"> -->
+            </div>
+          </div>
+        </div>
 
-            <div v-for="game in sepGames" class="container_gameInfo row justify-content-between">
-              <a href="#" @click.prevent="showThis(game.previus, game.id)" class="container">
-                <div class="row justify-content-between">
-                  <p>{{ game.hTeam }}</p>
-                  <p>{{ game.date }} {{ game.time }}</p>
-                  <p>{{ game.vTeam }}</p>
+        <div v-if="show.octSchedule" class="octSchedule" key="october">
+          <div class="container">
+            <div class="container_title row justify-content-center">
+              <h1>Games</h1>
+            </div>
+            <div class="container_date row justify-content-between m-1">
+              <a href="#" @click.prevent="showThis('octSchedule','sepSchedule')"><i class="material-icons">arrow_back_ios</i></a>
+              <div class="">
+                <h4>October</h4>
+              </div>
+              <a href="#" @click.prevent="showThis('octSchedule','sepSchedule')"><i class="material-icons">arrow_forward_ios</i></a>
+            </div>
+            <div v-for="game in octGames" class="container_gameInfo row justify-content-center">
+              <a href="#" @click.prevent="showThis(game.previus, game.id)">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="d-flex flex-column align-items-center">
+                    <img :src="game.hTeamImg" alt="TeamLogo" class="scheduleImg">
+                    <p class="teamLeft">{{ game.hTeam }}</p>
+                  </div>
+                  <p class="timeInfo  d-flex justify-content-center">{{ game.date }} {{ game.time }}</p>
+                  <div class="d-flex flex-column align-items-center">
+                    <img :src="game.vTeamImg" alt="TeamLogo" class="scheduleImg">
+                    <p class="teamRight">{{ game.vTeam }}</p>
+                  </div>
                 </div>
               </a>
               <hr class="hr">
             </div>
-
           </div>
         </div>
       </transition>
-      <transition
-      name="custom-classes-transition"
-      enter-to-class="animated bounceInRight"
-      leave-to-class="animated bounceOutRight"
-      >
-      <div v-show="show.octSchedule" class="octSchedule">
-        <div class="container">
-          <div class="container_title row justify-content-center">
-            <h1>Games</h1>
-          </div>
-          <div class="container_date row justify-content-between m-1">
-            <a href="#" @click.prevent="showThis('octSchedule','sepSchedule')"><i class="material-icons">arrow_back_ios</i></a>
-            <div class="">
-              <h4>October</h4>
+
+    </div>
+
+    <div v-if="isLoaded" class="games" key="games">
+      <transition-group name="custom-classes-transition" enter-active-class="animated fadeIn">
+        <div v-for="game of gameData" :key="game.id" v-show="show[game.id]" :class="game.id">
+          <div class="container info">
+            <div class="d-flex m-2 justify-content-between info_back">
+              <a v-if="!landscape" key="landscape" href="#" @click.prevent="showThis(game.id, game.previus)"><i class="material-icons">arrow_back_ios</i></a>
+              <a href="#" @click.prevent="showThis(game.id, game.chat)"><i class="material-icons">chat</i></a>
             </div>
-            <a href="#" @click.prevent="showThis('octSchedule','sepSchedule')"><i class="material-icons">arrow_forward_ios</i></a>
-          </div>
-
-
-          <div v-if="isLoaded" v-for="game in octGames" class="container_gameInfo row justify-content-between">
-            <a href="#" @click.prevent="showThis(game.previus, game.id)" class="container">
-              <div class="row justify-content-between">
-                <p>{{ game.hTeam }}</p>
-                <p>{{ game.date }} {{ game.time }}</p>
-                <p>{{ game.vTeam }}</p>
-              </div>
-            </a>
-          </div>
-
-        </div>
-      </div>
-      </transition>
-
-    </div>
-
-    <div v-if="isLoaded" class="games">
-
-      <div v-for="game of gameData" :key="game.id" v-show="show[game.id]" :class="game.id">
-        <div class="container info">
-          <div class="row m-2 justify-content-start info_back">
-            <a v-if="!landscape" href="#" @click.prevent="showThis(game.id, game.previus)"><i class="material-icons">arrow_back_ios</i></a>
-          </div>
-          <div class="row justify-content-center info_section">
-            <p>{{ game.hTeam }} vs {{ game.vTeam }}</p>
-          </div>
-          <div class="row justify-content-center info_section">
-            <p>{{ game.time }} {{ game.date }}/2019</p>
-          </div>
-          <div class="row justify-content-center info_section">
-            <p>{{ game.location }}</p>
-          </div>
-          <div class="row justify-content-center info_section">
-            <iframe :src="game.map" width="95%" height="300vh" frameborder="0" style="border:0" allowfullscreen>
-            </iframe>
-
+            <div class="info_section">
+              <p class="d-flex justify-content-around align-items-center">
+                <img :src="game.hTeamImg" alt="TeamLogo" class="gameImg">
+                {{ game.hTeam }} vs {{ game.vTeam }}
+                <img :src="game.vTeamImg" alt="TeamLogo" class="gameImg">
+              </p>
+            </div>
+            <div class="row justify-content-center info_section">
+              <p>{{ game.time }} {{ game.date }}/2019</p>
+            </div>
+            <div class="row justify-content-center info_section">
+              <p>{{ game.location }}</p>
+            </div>
+            <div class="info_section map">
+              <iframe :src="game.map" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen>
+              </iframe>
+            </div>
           </div>
         </div>
-      </div>
-
+      </transition-group>
     </div>
 
-    <button @click="signOut">
+    <div v-if="isLoaded" class="chats">
+      <transition-group name="custom-classes-transition" enter-active-class="animated fadeIn" :duration="1000">
+        <div v-for="game of gameData" :key="game.chat" v-show="show[game.chat]" class="container">
+          <div class="row justify-content-center align-items-center m-3">
+            <a href="#" @click.prevent="showThis(game.chat, game.id)" class="justify-self-start iconBack"><i class="material-icons">arrow_back_ios</i></a>
+            <h3 class="d-flex justify-content-center">{{ game.hTeam }} vs {{ game.vTeam }}</h3>
+          </div>
+          <div :id="game.chat" class="chat container flex-column"></div>
+          <div class="inputChat row justify-content-around align-items-center">
+            <input type="text" :id="game.msgChat" class="form-control form-rounded" placeholder="Write a message">
+            <button @click="sendMessage(game.msgChat)" class="mdc-fab">
+              <i class="material-icons mdc-fab__icon">send</i>
+            </button>
+          </div>
+        </div>
+      </transition-group>
+    </div>
+
+
+    <!-- <button class="mdc-button" @click="signOut">
       Sign-out
     </button>
-    <button @click="signIn" class="">
-      <i class="material-icons">account_circle</i>Sign-in with Google
-    </button>
-
-    <div id="chat" class="chat container"></div>
-    <input type="text" id="message">
-    <button id="send" @click="sendMessage">Enviar</button>
-
-
+    <button @click="signIn" class="mdc-button">
+      <i class="material-icons">account_circle</i>
+      <span class="">Sign-in with Google</span>
+    </button> -->
   </div>
-
   <!-- Firebase App is always required and must be first -->
   <script src="/__/firebase/5.8.5/firebase-app.js"></script>
 

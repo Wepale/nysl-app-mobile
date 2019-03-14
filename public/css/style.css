@@ -1,17 +1,57 @@
-[v-cloak] > * { display:none; }
-[v-cloak]::before { content: "loading..."; }
+[v-cloak]>* {
+  display: none;
+}
+
+/* [v-cloak]::before {
+  content: "loading...";
+} */
+.landscape {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.myContainer {
+  position: sticky;
+  top: 0;
+  background-color: rgba(1, 116, 248, 0.6);
+}
+
+.logo {
+  width: 20%;
+}
 
 .container_gameInfo {
-  margin: 1rem;
+  margin-top: 1rem;
+}
+
+.form-rounded {
+  border-radius: 1rem;
 }
 
 .container_gameInfo a {
-  color:black;
+  color: black;
+  width: 100%;
 }
 
-.schedule{
+.timeInfo {
+  width: 36%;
+}
+
+/* .team {
+  background-color: whitesmoke;
+  border-radius: 40vh;
+  padding: 1vh;
+} */
+.schedule {
   max-height: 100vh;
   overflow: auto;
+}
+
+.scheduleImg {
+  width: 70%;
+}
+
+.gameImg {
+  width: 13%;
 }
 
 .hr {
@@ -19,20 +59,201 @@
   margin: 0;
 }
 
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+
+.fade-enter, .fade-leave-to
+
+/* .fade-leave-active below version 2.1.8 */
+  {
+  opacity: 0;
+}
+
+.chat {
+  height: 33rem;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, .03);
+  border-radius: 5vh;
+}
+
+.chats {
+  grid-column: 1/2;
+}
+
+.inputChat {
+  margin-top: 1vh;
+}
+
+.inputChat input {
+  height: 2rem;
+  width: 80%;
+}
+
+.inputChat button {
+  width: 6vh;
+  height: 6vh;
+}
+
+a, button {
+  color: #006bb7;
+}
+
+.map {
+  height: 27rem;
+}
+
+/* Chat Bubbles */
+/* Others Users */
+.talk-bubble {
+  margin: 1.5vh 3vh;
+  display: inline-block;
+  position: relative;
+  height: auto;
+  background-color: lightyellow;
+}
+
+.tri-right.border.left-top:before {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: -40px;
+  right: auto;
+  top: -8px;
+  bottom: auto;
+  border: 32px solid;
+  border-color: #666 transparent transparent transparent;
+}
+
+.tri-right.left-top:after {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: -20px;
+  right: auto;
+  top: 0px;
+  bottom: auto;
+  border: 22px solid;
+  border-color: lightyellow transparent transparent transparent;
+}
+
+.talktextRight {
+  padding: 0.5rem 1.5rem;
+  text-align: right;
+  line-height: 1.5em;
+  max-width: 45vh;
+}
+
+.talktextLeft {
+  padding: 0.5rem 1.5rem;
+  text-align: left;
+  line-height: 1.5em;
+}
+
+.round {
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+}
+
+.border {
+  border: 8px solid #666;
+}
+
+.pChat {
+  word-wrap: break-word;
+  margin: 0;
+}
+
+.name {
+  margin: 5px;
+  font-size: 13px;
+  color: darkgrey;
+  font-weight: bolder;
+}
+
+.tri-right.border.right-top:before {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: auto;
+  right: -40px;
+  top: -8px;
+  bottom: auto;
+  border: 32px solid;
+  border-color: #666 transparent transparent transparent;
+}
+
+.tri-right.right-top:after {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: auto;
+  right: -20px;
+  top: 0px;
+  bottom: auto;
+  border: 20px solid;
+  border-color: lightyellow transparent transparent transparent;
+}
+
 /* Landscape properties */
 @media (orientation: landscape) {
-
   .landscape {
     display: grid;
     grid-template-columns: 1fr 1fr;
+  }
+
+  .timeInfo {
+    width: 51%;
+  }
+
+  .chats {
+    grid-column: 1/3;
+  }
+
+  .header {
+    grid-column: 1/3;
+  }
+
+  .chat {
+    height: 60vh;
+    overflow: auto;
+  }
+
+  .inputChat input {
+    height: 7vh;
+    width: 85%;
+  }
+
+  .inputChat button {
+    width: 10vh;
+    height: 10vh;
   }
 
   p {
     margin-bottom: 0;
   }
 
+  .map {
+    height: 14rem;
+  }
+  .logo {
+      width: 10%;
+  }
+  .info_back {
+    justify-content: flex-end;
+  }
 }
 
 /* @include media-breakpoint-up(sm) {
 
-} */
+}
+
+*/
+.mdc-fab {
+  background-color: purple;
+}

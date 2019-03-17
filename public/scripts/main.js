@@ -8,8 +8,10 @@ const myVue = new Vue({
     landscape: false,
     previusShow: "sepSchedule",
     actualShow: "sepSchedule",
-    currentUser: "",
+    currentUser: null,
     currentUID: "",
+    currentUimg: "",
+    currentUserName: "",
     db: firebase.database(),
     show: {
       sepSchedule: true,
@@ -22,6 +24,9 @@ const myVue = new Vue({
       window.addEventListener("orientationchange", () => this.landscape = !this.landscape);
     },
 
+    showLoginPage(){
+      return this.actualShow.includes("chat") && this.currentUser == null;
+    },
 
     doOnLandscape() {
 
@@ -30,16 +35,6 @@ const myVue = new Vue({
       } else if (this.actualShow.includes("Schedule")) {
         this.show[this.gameData.find(game => game.previus === this.actualShow).id] = true;
       }
-      // switch (true) {
-      //   case this.actualShow.includes("Game"):
-      //     this.show[this.gameData.find(game => game.id === this.actualShow).previus] = true;
-      //     break;
-      //   case this.actualShow.includes("Schedule"):
-      //     this.show[this.gameData.find(game => game.previus === this.actualShow).id] = true;
-      //     break;
-      //   default:
-      //     //Includes "chat"
-      // }
     },
 
     showOnlyThis(keyName) {
@@ -52,9 +47,7 @@ const myVue = new Vue({
       this.actualShow = actual;
       this.showOnlyThis(actual);
       this.$forceUpdate();
-      if (this.landscape) {
-        this.doOnLandscape();
-      }
+      this.landscape ? this.doOnLandscape() : 0;
     },
 
     async getData() {
@@ -85,10 +78,12 @@ const myVue = new Vue({
         if (user) { //Log IN
           this.currentUID = user.uid;
           this.currentUser = user;
+          this.currentUimg = user.photoURL || 'https://wowsciencecamp.org/wp-content/uploads/2018/07/dummy-user-img-1.png';
+          this.currentUserName = user.displayName;
           this.writeUserData(user.uid, user.displayName, user.photoURL);
         } else { //Log Out
           // Set currentUID to null.
-          this.currentUID = null;
+          this.currentUID = this.currentUser = null;
           // Display the splash page where you can sign-in.
         }
       });
@@ -99,7 +94,7 @@ const myVue = new Vue({
     },
 
     getProfilePicUrl() {
-      return firebase.auth().currentUser.photoURL || '/images/profile_placeholder.png';
+      return firebase.auth().currentUser.photoURL || 'https://wowsciencecamp.org/wp-content/uploads/2018/07/dummy-user-img-1.png';
     },
 
     getUserName() {
@@ -109,6 +104,7 @@ const myVue = new Vue({
     signIn() {
       // Sign into Firebase using popup auth & Google as the identity provider.
       firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());
+      this.gameData.forEach(game => this.scrollBottom(game.chat));
     },
 
     signOut() {
@@ -119,8 +115,6 @@ const myVue = new Vue({
     //Firebase Database
 
     sendMessage(msgID) {
-      console.log(msgID);
-      console.log(document.getElementById(msgID));
       let msg = document.getElementById(msgID).value;
       this.db.ref(msgID).push({
         message: msg,
@@ -145,7 +139,7 @@ const myVue = new Vue({
             <div class="talk-bubble tri-right round right-top">
               <div class="talktextRight">
                 <p class="pChat name">${data.val().user}</p>
-                <p class="pChat">${data.val().message}</p>
+                <p class="pChat">${(data.val().message).replace(/\s\s+/g, ' ')}</p>
               </div>
             </div>
             </div>`;

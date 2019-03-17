@@ -36,11 +36,19 @@
       <div class="myContainer">
         <div class="container d-flex justify-content-between align-items-center">
           <!-- <div class=""> -->
-            <img class="logo" src="http://assets.stickpng.com/thumbs/58428defa6515b1e0ad75ab4.png" alt="Logo">
+          <a class="logo" href="#" @click.prevent="showThis('octSchedule','sepSchedule')"><img src="http://assets.stickpng.com/thumbs/58428defa6515b1e0ad75ab4.png" alt="Logo"></a>
           <!-- </div> -->
-          <div class="d-flex justify-content-end align-items-center">
+          <div class="d-flex justify-content-end align-items-center logBut">
             <!-- <a href="#" class="" @click.prevent="signOut">Sign-out</a> -->
-            <a href="#" @click.prevent="signIn" class=""><i class="material-icons">account_circle</i></a>
+            <a v-if="currentUser == null" href="#" @click.prevent="signIn" class=""><i class="material-icons">account_circle</i></a>
+            <a v-else href="#" @click.prevent="signOut">
+              <div class="logIn">
+                <div class="d-flex justify-content-end align-items-center">
+                  <img :src="currentUimg" alt="UserImg" class="mr-2">
+                  <p class="m-0"> {{ currentUserName }} </p>
+                </div>
+              </div>
+            </a>
           </div>
         </div>
       </div>
@@ -147,13 +155,17 @@
 
     <div v-if="isLoaded" class="chats">
       <transition-group name="custom-classes-transition" enter-active-class="animated fadeIn" :duration="1000">
-        <div v-for="game of gameData" :key="game.chat" v-show="show[game.chat]" class="container">
-          <div class="row justify-content-center align-items-center m-3">
+        <div v-for="game of gameData" :key="game.chat" v-show="show[game.chat] && currentUser !== null" class="container">
+          <div class="d-flex justify-content-center align-items-center m-2">
             <a href="#" @click.prevent="showThis(game.chat, game.id)" class="justify-self-start iconBack"><i class="material-icons">arrow_back_ios</i></a>
-            <h3 class="d-flex justify-content-center">{{ game.hTeam }} vs {{ game.vTeam }}</h3>
+            <div class="d-flex justify-content-center align-items-center chatImg">
+              <img class="mr-3" :src="game.hTeamImg" alt="hTeamLogo">
+              <p>vs</p>
+              <img class="ml-3" :src="game.vTeamImg" alt="vTeamLogo">
+            </div>
           </div>
           <div :id="game.chat" class="chat container flex-column"></div>
-          <div class="inputChat row justify-content-around align-items-center">
+          <div class="inputChat d-flex justify-content-around align-items-center mt-2">
             <input type="text" :id="game.msgChat" class="form-control form-rounded" placeholder="Write a message">
             <button @click="sendMessage(game.msgChat)" class="mdc-fab">
               <i class="material-icons mdc-fab__icon">send</i>
@@ -163,6 +175,9 @@
       </transition-group>
     </div>
 
+    <div v-if="isLoaded && showLoginPage()" class="needLogIn d-flex justify-content-center align-items-center">
+      <button type="button" name="button" @click="signIn" class="d-flex align-items-center btn btn-outline-primary btn-lg padding"><i class="material-icons mr-2">account_circle</i>Log In</button>
+    </div>
 
     <!-- <button class="mdc-button" @click="signOut">
       Sign-out

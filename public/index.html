@@ -12,15 +12,14 @@
   <!-- Icons -->
   <link href="https://fonts.googleapis.com/css?family=Martel:200" rel="stylesheet">
 
-  <!-- Material Design Lite -->
+  <!-- Material Design -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.orange-indigo.min.css">
   <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
   <script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
   <!-- Animated Css -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
   <!-- CSS -->
-  <link href="css/reset.css" rel="stylesheet">
+  <!-- <link href="css/reset.css" rel="stylesheet"> -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link href="css/style.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
@@ -36,7 +35,7 @@
       <div class="myContainer">
         <div class="container d-flex justify-content-between align-items-center">
           <!-- <div class=""> -->
-          <a class="logo" href="#" @click.prevent="showThis('octSchedule','sepSchedule')"><img src="http://assets.stickpng.com/thumbs/58428defa6515b1e0ad75ab4.png" alt="Logo"></a>
+          <a class="logo" href="#" @click.prevent="showThis('sepSchedule')"><img src="http://assets.stickpng.com/thumbs/58428defa6515b1e0ad75ab4.png" alt="Logo"></a>
           <!-- </div> -->
           <div class="d-flex justify-content-end align-items-center logBut">
             <!-- <a href="#" class="" @click.prevent="signOut">Sign-out</a> -->
@@ -64,14 +63,14 @@
               <h1>Games</h1>
             </div>
             <div class="container_date row justify-content-between m-1">
-              <a href="#" @click.prevent="showThis('sepSchedule','octSchedule')"><i class="material-icons">arrow_back_ios</i></a>
+              <a href="#" @click.prevent="showThis('octSchedule')"><i class="material-icons">arrow_back_ios</i></a>
               <div>
                 <h4>September</h4>
               </div>
-              <a href="#" @click.prevent="showThis('sepSchedule','octSchedule')"><i class="material-icons">arrow_forward_ios</i></a>
+              <a href="#" @click.prevent="showThis('octSchedule')"><i class="material-icons">arrow_forward_ios</i></a>
             </div>
             <div v-for="game in sepGames" class="container_gameInfo row justify-content-center shadow p-3 mb-5 bg-white rounded">
-              <a href="#" @click.prevent="showThis(game.previus, game.id)">
+              <a href="#" @click.prevent="showThis(game.id)">
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="d-flex flex-column align-items-center">
                     <img :src="game.hTeamImg" alt="TeamLogo" class="scheduleImg">
@@ -95,14 +94,14 @@
               <h1>Games</h1>
             </div>
             <div class="container_date row justify-content-between m-1">
-              <a href="#" @click.prevent="showThis('octSchedule','sepSchedule')"><i class="material-icons">arrow_back_ios</i></a>
+              <a href="#" @click.prevent="showThis('sepSchedule')"><i class="material-icons">arrow_back_ios</i></a>
               <div class="">
                 <h4>October</h4>
               </div>
-              <a href="#" @click.prevent="showThis('octSchedule','sepSchedule')"><i class="material-icons">arrow_forward_ios</i></a>
+              <a href="#" @click.prevent="showThis('sepSchedule')"><i class="material-icons">arrow_forward_ios</i></a>
             </div>
-            <div v-for="game in octGames" class="container_gameInfo row justify-content-center">
-              <a href="#" @click.prevent="showThis(game.previus, game.id)">
+            <div v-for="game in octGames" class="container_gameInfo row justify-content-center shadow p-3 mb-5 bg-white rounded">
+              <a href="#" @click.prevent="showThis(game.id)">
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="d-flex flex-column align-items-center">
                     <img :src="game.hTeamImg" alt="TeamLogo" class="scheduleImg">
@@ -127,9 +126,9 @@
       <transition-group name="custom-classes-transition" enter-active-class="animated fadeIn">
         <div v-for="game of gameData" :key="game.id" v-show="show[game.id]" :class="game.id">
           <div class="container info">
-            <div class="d-flex m-2 justify-content-between info_back">
-              <a v-if="!landscape" key="landscape" href="#" @click.prevent="showThis(game.id, game.previus)"><i class="material-icons">arrow_back_ios</i></a>
-              <a href="#" @click.prevent="showThis(game.id, game.chat)"><i class="material-icons">chat</i></a>
+            <div class="d-flex justify-content-between info_back">
+              <a v-if="!landscape" key="landscape" href="#" @click.prevent="showThis(game.previus)"><i class="material-icons">arrow_back_ios</i></a>
+              <a href="#" @click.prevent="showThis(game.chat)"><i class="material-icons">chat</i></a>
             </div>
             <div class="info_section">
               <p class="d-flex justify-content-around align-items-center">
@@ -154,10 +153,10 @@
     </div>
 
     <div v-if="isLoaded" class="chats">
-      <transition-group name="custom-classes-transition" enter-active-class="animated fadeIn" :duration="1000">
+      <transition-group name="custom-classes-transition" enter-active-class="animated fadeIn">
         <div v-for="game of gameData" :key="game.chat" v-show="show[game.chat] && currentUser !== null" class="container">
           <div class="d-flex justify-content-center align-items-center m-2">
-            <a href="#" @click.prevent="showThis(game.chat, game.id)" class="justify-self-start iconBack"><i class="material-icons">arrow_back_ios</i></a>
+            <a href="#" @click.prevent="showThis(game.id)" class="justify-self-start iconBack"><i class="material-icons">arrow_back_ios</i></a>
             <div class="d-flex justify-content-center align-items-center chatImg">
               <img class="mr-3" :src="game.hTeamImg" alt="hTeamLogo">
               <p>vs</p>
@@ -166,8 +165,8 @@
           </div>
           <div :id="game.chat" class="chat container flex-column"></div>
           <div class="inputChat d-flex justify-content-around align-items-center mt-2">
-            <input type="text" :id="game.msgChat" class="form-control form-rounded" placeholder="Write a message">
-            <button @click="sendMessage(game.msgChat)" class="mdc-fab">
+            <input type="text" :id="game.msgChat" class="form-control form-rounded" v-model="messageText" placeholder="Write a message">
+            <button :disabled="!messageText.length" @click="sendMessage(game.msgChat)" class="mdc-fab">
               <i class="material-icons mdc-fab__icon">send</i>
             </button>
           </div>

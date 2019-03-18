@@ -6,6 +6,7 @@ const myVue = new Vue({
     octGames: [],
     isLoaded: false,
     landscape: false,
+    messageText: "",
     previusShow: "sepSchedule",
     actualShow: "sepSchedule",
     currentUser: null,
@@ -24,12 +25,11 @@ const myVue = new Vue({
       window.addEventListener("orientationchange", () => this.landscape = !this.landscape);
     },
 
-    showLoginPage(){
+    showLoginPage() {
       return this.actualShow.includes("chat") && this.currentUser == null;
     },
 
     doOnLandscape() {
-
       if (this.actualShow.includes("Game")) {
         this.show[this.gameData.find(game => game.id === this.actualShow).previus] = true;
       } else if (this.actualShow.includes("Schedule")) {
@@ -42,12 +42,12 @@ const myVue = new Vue({
       Object.keys(this.show).filter(key => key !== keyName).forEach(key => this.show[key] = false);
     },
 
-    showThis(before, actual) {
-      this.previusShow = before;
+    showThis(actual) {
       this.actualShow = actual;
       this.showOnlyThis(actual);
       this.$forceUpdate();
       this.landscape ? this.doOnLandscape() : 0;
+      this.messageText = "";
     },
 
     async getData() {
@@ -62,11 +62,20 @@ const myVue = new Vue({
       this.gameData = data;
       this.sepGames = data.filter(game => game.month === "september");
       this.octGames = data.filter(game => game.month === "october");
-      this.gameData.map(game => this.getMessage(game.msgChat, game.chat));
+      this.gameData.forEach(game => this.getMessage(game.msgChat, game.chat));
       this.isLoaded = true;
     },
 
-    //Firebase Auth
+    scrollBottom(chatID) {
+      const chat = document.getElementById(chatID);
+      chat.scrollTop = chat.scrollHeight - chat.clientHeight;
+    },
+
+    /*
+    *
+    * FIREBASE AUTH
+    *
+    */
     initFirebaseAuth() {
       // Listen to auth state changes.
       firebase.auth().onAuthStateChanged(user => {
@@ -82,29 +91,15 @@ const myVue = new Vue({
           this.currentUserName = user.displayName;
           this.writeUserData(user.uid, user.displayName, user.photoURL);
         } else { //Log Out
-          // Set currentUID to null.
           this.currentUID = this.currentUser = null;
-          // Display the splash page where you can sign-in.
         }
       });
-    },
-
-    getUserID() {
-      return firebase.auth().currentUser.uid;
-    },
-
-    getProfilePicUrl() {
-      return firebase.auth().currentUser.photoURL || 'https://wowsciencecamp.org/wp-content/uploads/2018/07/dummy-user-img-1.png';
-    },
-
-    getUserName() {
-      return firebase.auth().currentUser.displayName;
     },
 
     signIn() {
       // Sign into Firebase using popup auth & Google as the identity provider.
       firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());
-      this.gameData.forEach(game => this.scrollBottom(game.chat));
+      // this.gameData.forEach(game => this.scrollBottom(game.chat));
     },
 
     signOut() {
@@ -112,16 +107,19 @@ const myVue = new Vue({
       firebase.auth().signOut();
     },
 
-    //Firebase Database
+    /*
+    *
+    * FIREBASE DATABASE
+    *
+    */
 
     sendMessage(msgID) {
-      let msg = document.getElementById(msgID).value;
       this.db.ref(msgID).push({
-        message: msg,
-        user: this.getUserName(),
+        message: this.messageText,
+        user: this.currentUser.displayName,
         userID: this.currentUID
       });
-      document.getElementById(msgID).value = "";
+      this.messageText = "";
     },
 
     writeUserData(userId, name, imageUrl) {
@@ -131,37 +129,25 @@ const myVue = new Vue({
       });
     },
 
-    getMessage(msgID, chatID) {
-      this.db.ref(msgID).on('child_added', data => {
-        if (data.val().userID == this.currentUID) {
-          document.getElementById(chatID).innerHTML +=
-            `<div class="d-flex justify-content-end">
-            <div class="talk-bubble tri-right round right-top">
-              <div class="talktextRight">
-                <p class="pChat name">${data.val().user}</p>
-                <p class="pChat">${(data.val().message).replace(/\s\s+/g, ' ')}</p>
-              </div>
-            </div>
-            </div>`;
-          this.scrollBottom(chatID)
-        } else {
-          document.getElementById(chatID).innerHTML +=
-            `<div class="d-flex justify-content-start">
-        <div class="talk-bubble tri-right left-top round">
-          <div class="talktextLeft">
+    chatTemplate(chatID, data, position, firstClass, secondClass) {
+      document.getElementById(chatID).innerHTML +=
+        `<div class="d-flex justify-content-${position}">
+        <div class="talk-bubble tri-right ${firstClass} round">
+          <div class="${secondClass}">
             <p class="pChat name">${data.val().user}</p>
-            <p class="pChat">${data.val().message}</p>
+            <p class="pChat">${(data.val().message).replace(/\s\s+/g, ' ')}</p>
           </div>
         </div>
         </div>`;
-          this.scrollBottom(chatID)
-        }
-      });
     },
 
-    scrollBottom(chatID) {
-      const chat = document.getElementById(chatID);
-      chat.scrollTop = chat.scrollHeight - chat.clientHeight;
+    getMessage(msgID, chatID) {
+      this.db.ref(msgID).on('child_added', data => {
+        data.val().userID == this.currentUID
+          ? this.chatTemplate(chatID, data, "end", "rightTop", "talktextRight")
+          : this.chatTemplate(chatID, data, "start", "left-top", "talktextLeft")
+        this.scrollBottom(chatID)
+      });
     },
   },
 
@@ -176,8 +162,7 @@ const myVue = new Vue({
     this.initFirebaseAuth();
   },
   beforeUpdate() {
-    console.log("Before: " + this.previusShow);
-    console.log("Now: " + this.actualShow);
+    console.log(this.show);
   },
   mounted() {
     this.checkOrientation();
